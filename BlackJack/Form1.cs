@@ -19,7 +19,7 @@ namespace BlackJack
 
         private void blackjack_Load(object sender, EventArgs e)
         {
-
+            int a = 0;
         }
     }
 }
