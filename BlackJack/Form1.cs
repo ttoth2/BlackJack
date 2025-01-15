@@ -19,7 +19,19 @@ namespace BlackJack
 
         private void blackjack_Load(object sender, EventArgs e)
         {
-            int a = 0;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Playbtn_Click(object sender, EventArgs e)
+        {
+            
+           new Game().Show();
+           Hide();
+ 
         }
     }
 }
