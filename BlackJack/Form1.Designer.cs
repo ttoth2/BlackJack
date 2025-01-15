@@ -89,8 +89,11 @@
             this.Controls.Add(this.txb_alap);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Playbtn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "blackjack";
             this.Text = "BlackJack";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.blackjack_FormClosed);
             this.Load += new System.EventHandler(this.blackjack_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

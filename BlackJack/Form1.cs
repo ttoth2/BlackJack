@@ -15,6 +15,7 @@ namespace BlackJack
         public blackjack()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void blackjack_Load(object sender, EventArgs e)
@@ -28,10 +29,17 @@ namespace BlackJack
 
         private void Playbtn_Click(object sender, EventArgs e)
         {
-            
-           new Game().Show();
-           Hide();
+
+            Form form2 = new Game();
+            form2.Show();
+            form2.Location = this.Location;
+            Hide();
  
+        }
+
+        private void blackjack_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

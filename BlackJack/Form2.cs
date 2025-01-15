@@ -26,5 +26,13 @@ namespace BlackJack
         {
             Application.Exit();
         }
+
+        private void quitbtn_Click(object sender, EventArgs e)
+        {
+            Form form2 = new blackjack();
+            form2.Show();
+            form2.Location = this.Location;
+            Hide();
+        }
     }
 }
