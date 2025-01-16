@@ -68,6 +68,7 @@
             this.txb_playercount.Name = "txb_playercount";
             this.txb_playercount.Size = new System.Drawing.Size(200, 20);
             this.txb_playercount.TabIndex = 3;
+            this.txb_playercount.TextChanged += new System.EventHandler(this.txb_playercount_TextChanged);
             // 
             // label1
             // 
