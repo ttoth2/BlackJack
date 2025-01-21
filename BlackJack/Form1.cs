@@ -42,7 +42,7 @@ namespace BlackJack
             catch { }
             if (alap <= 30000 && alap >= 1000 && jatekos > 0 && jatekos < 6)
             {
-                Form form2 = new Game();
+                Form form2 = new Game(alap,jatekos);
                 form2.Show();
                 form2.Location = this.Location;
                 Hide();
