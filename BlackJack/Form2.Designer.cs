@@ -33,10 +33,10 @@
             this.btnstand = new System.Windows.Forms.Button();
             this.btnhit = new System.Windows.Forms.Button();
             this.btndouble = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txbpp = new System.Windows.Forms.TextBox();
+            this.txbop = new System.Windows.Forms.TextBox();
+            this.txbtet = new System.Windows.Forms.TextBox();
+            this.txbossz = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // quitbtn
@@ -77,33 +77,37 @@
             this.btndouble.UseVisualStyleBackColor = true;
             this.btndouble.Click += new System.EventHandler(this.btndouble_Click);
             // 
-            // textBox1
+            // txbpp
             // 
-            this.textBox1.Location = new System.Drawing.Point(596, 457);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.txbpp.Location = new System.Drawing.Point(743, 485);
+            this.txbpp.Name = "txbpp";
+            this.txbpp.ReadOnly = true;
+            this.txbpp.Size = new System.Drawing.Size(100, 20);
+            this.txbpp.TabIndex = 4;
             // 
-            // textBox2
+            // txbop
             // 
-            this.textBox2.Location = new System.Drawing.Point(635, 69);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(97, 20);
-            this.textBox2.TabIndex = 5;
+            this.txbop.Location = new System.Drawing.Point(743, 94);
+            this.txbop.Name = "txbop";
+            this.txbop.ReadOnly = true;
+            this.txbop.Size = new System.Drawing.Size(97, 20);
+            this.txbop.TabIndex = 5;
             // 
-            // textBox3
+            // txbtet
             // 
-            this.textBox3.Location = new System.Drawing.Point(68, 12);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(110, 20);
-            this.textBox3.TabIndex = 6;
+            this.txbtet.Location = new System.Drawing.Point(68, 12);
+            this.txbtet.Name = "txbtet";
+            this.txbtet.ReadOnly = true;
+            this.txbtet.Size = new System.Drawing.Size(110, 20);
+            this.txbtet.TabIndex = 6;
             // 
-            // textBox4
+            // txbossz
             // 
-            this.textBox4.Location = new System.Drawing.Point(671, 586);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(172, 20);
-            this.textBox4.TabIndex = 7;
+            this.txbossz.Location = new System.Drawing.Point(671, 586);
+            this.txbossz.Name = "txbossz";
+            this.txbossz.ReadOnly = true;
+            this.txbossz.Size = new System.Drawing.Size(172, 20);
+            this.txbossz.TabIndex = 7;
             // 
             // Game
             // 
@@ -111,10 +115,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(984, 611);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txbossz);
+            this.Controls.Add(this.txbtet);
+            this.Controls.Add(this.txbop);
+            this.Controls.Add(this.txbpp);
             this.Controls.Add(this.btndouble);
             this.Controls.Add(this.btnhit);
             this.Controls.Add(this.btnstand);
@@ -136,9 +140,9 @@
         private System.Windows.Forms.Button btnstand;
         private System.Windows.Forms.Button btnhit;
         private System.Windows.Forms.Button btndouble;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txbpp;
+        private System.Windows.Forms.TextBox txbop;
+        private System.Windows.Forms.TextBox txbtet;
+        private System.Windows.Forms.TextBox txbossz;
     }
 }
