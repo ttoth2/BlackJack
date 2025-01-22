@@ -31,6 +31,7 @@ namespace BlackJack
             public string szam { get; set; }
             public int össz { get; set; }
             public int tet { get; set; }
+            public bool flag { get; set; }
             public List<Kartya> lap { get; set; }
         }
     
@@ -68,7 +69,24 @@ namespace BlackJack
             }
             return kartyak;
         }
-
+        public int megszam(List<Kartya>a)
+        {
+            int valasz = 0;
+            foreach(Kartya k in a)
+            {
+                if (k.Rang == "Ace")
+                {
+                    if (valasz >= 11)
+                    {
+                        valasz++;
+                    }
+                    else 
+                    { valasz += k.Ert; }
+                }
+                else { valasz += k.Ert; }
+            }
+            return valasz;
+        }
         public Kartya pluszK()
         {
             Kartya temp = pakk[0];
@@ -152,7 +170,7 @@ namespace BlackJack
             pakk = Pakli();
             for (int i = 0; i < jatekosszam; i++)
             {
-                jatekosok.Add(new jatekos { szam = i.ToString(), tet = 0, lap = new List<Kartya>(), össz = alap });
+                jatekosok.Add(new jatekos { szam = i.ToString(), tet = 0, lap = new List<Kartya>(), flag = false, össz = alap });
                 radio[i] = new RadioButton();
                 radio[i].Name = i.ToString();
                 radio[i].Location = new Point(920, 30 + i * 40);
@@ -271,6 +289,46 @@ namespace BlackJack
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnhit_Click(object sender, EventArgs e)
+        {
+            jatekosok[check].lap.Add(pluszK());
+            if (megszam(jatekosok[check].lap) > 21)
+            {
+                veszt();
+            } 
+            
+            picture2.Add(new PictureBox());
+            picture2[picture2.Count-1].Size = new Size(140, 220);
+            picture2[picture2.Count - 1].SizeMode = PictureBoxSizeMode.StretchImage;
+            picture2[picture2.Count - 1].Image = Image.FromFile($"{jatekosok[check].lap[picture2.Count - 1].id}.png");
+            picture2[picture2.Count - 1].Location = new Point(430+ (picture2.Count - 3)* 20, 340);
+            Controls.Add(picture2[picture2.Count - 1]);
+        }
+
+        public void veszt()
+        {
+            jatekosok[check].flag = true;
+            jatekosok[check].tet = 0;
+        }
+        public void dönt()
+        {
+
+        }
+        public void nyer()
+        {
+
+        }
+
+        private void btnstand_Click(object sender, EventArgs e)
+        {
+            jatekosok[check].flag = true;
+        }
+
+        private void btnnext_Click(object sender, EventArgs e)
         {
 
         }

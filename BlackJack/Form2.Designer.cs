@@ -37,13 +37,14 @@
             this.txbop = new System.Windows.Forms.TextBox();
             this.txbtet = new System.Windows.Forms.TextBox();
             this.txbossz = new System.Windows.Forms.TextBox();
+            this.btnnext = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // quitbtn
             // 
-            this.quitbtn.Location = new System.Drawing.Point(908, 586);
+            this.quitbtn.Location = new System.Drawing.Point(908, 562);
             this.quitbtn.Name = "quitbtn";
-            this.quitbtn.Size = new System.Drawing.Size(75, 23);
+            this.quitbtn.Size = new System.Drawing.Size(75, 47);
             this.quitbtn.TabIndex = 0;
             this.quitbtn.Text = "Quit";
             this.quitbtn.UseVisualStyleBackColor = true;
@@ -55,8 +56,9 @@
             this.btnstand.Name = "btnstand";
             this.btnstand.Size = new System.Drawing.Size(100, 50);
             this.btnstand.TabIndex = 1;
-            this.btnstand.Text = "button1";
+            this.btnstand.Text = "STAND";
             this.btnstand.UseVisualStyleBackColor = true;
+            this.btnstand.Click += new System.EventHandler(this.btnstand_Click);
             // 
             // btnhit
             // 
@@ -64,8 +66,9 @@
             this.btnhit.Name = "btnhit";
             this.btnhit.Size = new System.Drawing.Size(100, 50);
             this.btnhit.TabIndex = 2;
-            this.btnhit.Text = "button2";
+            this.btnhit.Text = "HIT";
             this.btnhit.UseVisualStyleBackColor = true;
+            this.btnhit.Click += new System.EventHandler(this.btnhit_Click);
             // 
             // btndouble
             // 
@@ -73,7 +76,7 @@
             this.btndouble.Name = "btndouble";
             this.btndouble.Size = new System.Drawing.Size(110, 55);
             this.btndouble.TabIndex = 3;
-            this.btndouble.Text = "button3";
+            this.btndouble.Text = "DOUBLE";
             this.btndouble.UseVisualStyleBackColor = true;
             this.btndouble.Click += new System.EventHandler(this.btndouble_Click);
             // 
@@ -109,12 +112,23 @@
             this.txbossz.Size = new System.Drawing.Size(172, 20);
             this.txbossz.TabIndex = 7;
             // 
+            // btnnext
+            // 
+            this.btnnext.Location = new System.Drawing.Point(908, 470);
+            this.btnnext.Name = "btnnext";
+            this.btnnext.Size = new System.Drawing.Size(75, 48);
+            this.btnnext.TabIndex = 8;
+            this.btnnext.Text = "Next";
+            this.btnnext.UseVisualStyleBackColor = true;
+            this.btnnext.Click += new System.EventHandler(this.btnnext_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.Controls.Add(this.btnnext);
             this.Controls.Add(this.txbossz);
             this.Controls.Add(this.txbtet);
             this.Controls.Add(this.txbop);
@@ -144,5 +158,6 @@
         private System.Windows.Forms.TextBox txbop;
         private System.Windows.Forms.TextBox txbtet;
         private System.Windows.Forms.TextBox txbossz;
+        private System.Windows.Forms.Button btnnext;
     }
 }
