@@ -311,10 +311,10 @@ namespace BlackJack
                         t2.Visible = false;
                         t3.Visible = false;
                         pakk = Pakli();
-
-
-                        
-
+                        btndouble.Enabled = true;
+                        btnhit.Enabled = true;
+                        btnstand.Enabled = true;
+                        oszt();
                     }
                     else
                     {
@@ -336,7 +336,9 @@ namespace BlackJack
                         {
                             txbtet.Text = jatekosok[check].tet.ToString();
                             txbossz.Text = jatekosok[check].össz.ToString();
-
+                            btndouble.Enabled = true;
+                            btnhit.Enabled = true;
+                            btnstand.Enabled = true;
                             radio[check].Checked = false;
                             radio[0].Checked = true;
 
@@ -346,10 +348,6 @@ namespace BlackJack
                             t2.Visible = false;
                             t3.Visible = false;
                             pakk = Pakli();
-                            
-
-                            
-
                             oszt();
                         }
                         else
@@ -358,11 +356,13 @@ namespace BlackJack
                             txbossz.Text = jatekosok[check + 1].össz.ToString();
                             radio[check].Checked = false;
                             radio[check + 1].Checked = true;
-
                         }
                     }
                     else
                     {
+                        btndouble.Enabled = true;
+                        btnhit.Enabled = true;
+                        btnstand.Enabled = true;
                         txbtet.Text = jatekosok[check].tet.ToString();
                         txbossz.Text = jatekosok[check].össz.ToString();
                         t.Text = "0";
@@ -371,10 +371,7 @@ namespace BlackJack
                         t2.Visible = false;
                         t3.Visible = false;
                         pakk = Pakli();
-                        
-
-                        
-
+                       
                         oszt();
                     }
                 } else MessageBox.Show("nem megfelelő tét");
@@ -413,9 +410,26 @@ namespace BlackJack
             jatekosok[check].lap.Add(pluszK());
             if (megszam(jatekosok[check].lap) > 21)
             {
+                btndouble.Enabled = false;
+                btnhit.Enabled = false;
+                btnstand.Enabled = false;
                 veszt();
+                foreach (var item in jatekosok)
+                {
+                    if (item.flag)
+                    {
+                        igaze++;
+                    }
+                }
+                if (igaze == jatekosszam)
+                {
+                    összevet();
+                    btnnext.Enabled = true;
+                    return;
+                }
             }
             mutat();
+            
 
         }
         int igaze = 0;
@@ -423,7 +437,9 @@ namespace BlackJack
         {
             jatekosok[check].flag = true;
             igaze = 0;
-
+            btndouble.Enabled = false;
+            btnhit.Enabled = false;
+            btnstand.Enabled = false;
             foreach (var item in jatekosok)
             {
                 if (item.flag)
