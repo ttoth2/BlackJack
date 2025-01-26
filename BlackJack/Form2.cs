@@ -63,8 +63,8 @@ namespace BlackJack
             txbop.Enabled = false;
             txbtet.Enabled = false;
             txbossz.Enabled = false;
+            btnnext.Enabled = false;
 
-           
 
             txbpp.Text = "0";
             txbop.Text = "0";
@@ -110,6 +110,7 @@ namespace BlackJack
         }
         public void tetek()
         {
+            igaze = 0;
             for (int i = 0; i < picture.Count; i++)
             {
                 Controls.Remove(picture[i]);
@@ -136,6 +137,7 @@ namespace BlackJack
             t.Visible = true;
             t2.Visible = true;
             t3.Visible = true;
+            btnnext.Enabled = false;
         }
 
         public List<Kartya> Pakli()
@@ -199,30 +201,15 @@ namespace BlackJack
         }
         private void oszt()
         {
-
+            oszto.Clear();
+            oszto.Add(pluszK());
             oszto.Add(pluszK());
             for (int i = 0; i < picture.Count; i++)
             {
                 Controls.Remove(picture[i]);
             }
             picture.Clear();
-            for (int i = 0; i < oszto.Count; i++)
-            {
-                picture.Add(new PictureBox());
-                picture[i].Size = new Size(140, 220);
-                picture[i].SizeMode = PictureBoxSizeMode.StretchImage;
-                if (i == 0)
-                {
-                    picture[i].Image = Image.FromFile(@"..\..\kartya\1.png");
-                }
-                else
-                {
-                    picture[i].Image = Image.FromFile($"..\\..\\kartya\\{oszto[i].id}.png");
-                }
-                picture[i].Location = new Point(310 + i * 50, 35);
-                Controls.Add(picture[i]);
-                picture[i].BringToFront();
-            }
+            
             for (int i = 0; i < jatekosszam; i++)
             {
                 if (radio[i].Enabled)
@@ -236,7 +223,23 @@ namespace BlackJack
 
         private void mutat()
         {
-
+            for (int i = 0; i < oszto.Count; i++)
+            {
+                picture.Add(new PictureBox());
+                picture[i].Size = new Size(140, 220);
+                picture[i].SizeMode = PictureBoxSizeMode.StretchImage;
+                if (i == 0 &&  jatekosszam > igaze)
+                {
+                    picture[i].Image = Image.FromFile(@"..\..\kartya\1.png");
+                }
+                else
+                {
+                    picture[i].Image = Image.FromFile($"..\\..\\kartya\\{oszto[i].id}.png");
+                }
+                picture[i].Location = new Point(310 + i * 50, 35);
+                Controls.Add(picture[i]);
+                picture[i].BringToFront();
+            }
             for (int i = 0; i < picture2.Count; i++)
             {
                 Controls.Remove(picture2[i]);
@@ -269,7 +272,7 @@ namespace BlackJack
             }
             txbtet.Text = jatekosok[check].tet.ToString();
             txbossz.Text = jatekosok[check].össz.ToString();
-            if (!jatekosok[check].flag)
+            if (!jatekosok[check].flag && jatekosok[check].tet !=0 && jatekosok[check].össz != 0)
             {
                 btndouble.Enabled = true;
                 btnhit.Enabled = true;
@@ -292,10 +295,39 @@ namespace BlackJack
         {
             try
             {
+                if (jatekosok[check].össz == 0)
+                {
+                    if (check == jatekosszam - 1)
+                    {
+                        txbtet.Text = jatekosok[check].tet.ToString();
+                        txbossz.Text = jatekosok[check].össz.ToString();
+
+                        radio[check].Checked = false;
+                        radio[0].Checked = true;
+
+                        t.Text = "0";
+                        t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
+                        t.Visible = false;
+                        t2.Visible = false;
+                        t3.Visible = false;
+                        pakk = Pakli();
+
+
+                        
+
+                    }
+                    else
+                    {
+                        txbtet.Text = jatekosok[check + 1].tet.ToString();
+                        txbossz.Text = jatekosok[check + 1].össz.ToString();
+                        radio[check].Checked = false;
+                        radio[check + 1].Checked = true;
+                    }
+                }
                 if (int.Parse(t.Text) <= jatekosok[check].össz && int.Parse(t.Text) > 0)
                 {
 
-
+                    
                     jatekosok[check].össz -= int.Parse(t.Text);
                     jatekosok[check].tet = int.Parse(t.Text);
                     if (jatekosszam != 1)
@@ -314,11 +346,9 @@ namespace BlackJack
                             t2.Visible = false;
                             t3.Visible = false;
                             pakk = Pakli();
-                            oszto.Add(pluszK());
+                            
 
-                            btndouble.Enabled = true;
-                            btnhit.Enabled = true;
-                            btnstand.Enabled = true;
+                            
 
                             oszt();
                         }
@@ -341,11 +371,9 @@ namespace BlackJack
                         t2.Visible = false;
                         t3.Visible = false;
                         pakk = Pakli();
-                        oszto.Add(pluszK());
+                        
 
-                        btndouble.Enabled = true;
-                        btnhit.Enabled = true;
-                        btnstand.Enabled = true;
+                        
 
                         oszt();
                     }
@@ -378,15 +406,7 @@ namespace BlackJack
             mutat();
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void btnhit_Click(object sender, EventArgs e)
         {
@@ -398,12 +418,12 @@ namespace BlackJack
             mutat();
 
         }
-
+        int igaze = 0;
         private void btnstand_Click(object sender, EventArgs e)
         {
             jatekosok[check].flag = true;
-            
-            int igaze = 0;
+            igaze = 0;
+
             foreach (var item in jatekosok)
             {
                 if (item.flag)
@@ -413,7 +433,8 @@ namespace BlackJack
             }
             if (igaze == jatekosszam) 
             {
-                tetek();
+                összevet();
+                btnnext.Enabled = true;
                 return;
             }
             
@@ -421,9 +442,27 @@ namespace BlackJack
 
         private void btnnext_Click(object sender, EventArgs e)
         {
-
+            tetek();
         }
-
+        public void összevet()
+        {
+            if (megszam(oszto) < 17)
+            {
+                oszto.Add(pluszK());
+                mutat();
+                txbop.Text = megszam(oszto).ToString();
+            }
+           
+            foreach (jatekos item in jatekosok) 
+            {
+                if (megszam(oszto) > megszam(item.lap))
+                {
+                    item.tet = 0;
+                }
+                else { item.össz += (item.tet * 2); item.tet = 0; }
+            }
+            
+        }
         public void veszt()
         {
             jatekosok[check].flag = true;
@@ -437,6 +476,17 @@ namespace BlackJack
 
         }
         public void nyer()
+        {
+
+        }
+
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }
