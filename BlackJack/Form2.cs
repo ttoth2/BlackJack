@@ -534,8 +534,10 @@ namespace BlackJack
             form2.Show();
             form2.Location = this.Location;
             Hide();
-        }
 
+
+        }
+          
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
