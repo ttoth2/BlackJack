@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static BlackJack.blackjack;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace BlackJack
@@ -34,17 +35,90 @@ namespace BlackJack
             public bool flag { get; set; }
             public List<Kartya> lap { get; set; }
         }
-    
-          
-        
+
+
+        public List<Kartya> oszto = new List<Kartya>();
+        public List<Kartya> pakk = new List<Kartya>();
+        public List<jatekos> jatekosok = new List<jatekos>();
+        public int jatekosszam = 0;
+        public int alap = 0;
+        public int check = 0;
+        public List<PictureBox> picture = new List<PictureBox>();
+        public List<PictureBox> picture2 = new List<PictureBox>();
+        RadioButton[] radio = new RadioButton[5];
+        TextBox[] txbp = new TextBox[5];
+        TextBox t = new TextBox();
+        Label t2 = new Label();
+        Button t3 = new Button();
+        System.Drawing.Point loc = new System.Drawing.Point();
+        public Game(int a, int b, System.Drawing.Point l)
+        {
+            InitializeComponent();
+            loc = l;
+            alap = a;
+            jatekosszam = b;
+        }
+
+        private void Game_Load(object sender, EventArgs e)
+        {
+            this.Location = loc;
+            var bj = new blackjack();
+            txbpp.Text = "0";
+            txbop.Text = "0";
+            txbtet.Text = "0";
+            for (int i = 0; i < jatekosszam; i++)
+            {
+                jatekosok.Add(new jatekos { szam = i.ToString(), tet = 0, lap = new List<Kartya>(), flag = false, össz = alap });
+                radio[i] = new RadioButton();
+                radio[i].Name = i.ToString();
+                radio[i].Location = new Point(920, 30 + i * 40);
+                radio[i].Text = $"{(i + 1).ToString()}.játékos";
+                radio[i].CheckedChanged += r_Checked;
+                Controls.Add(radio[i]);
+            }
+            t2 = new Label();
+            t3 = new Button();
+            t = new TextBox();
+           
+            t.Size = new Size(200, 40);
+            t2.Size = new Size(200, 30);
+            t3.Size = new Size(200, 40);
+
+            t.Location = new Point(400, 300);
+            t2.Location = new Point(400, 260);
+            t3.Location = new Point(400, 340);
+
+            t3.Click += t_Click;
+            t3.Text = "tét megadása";
+            Controls.Add(t);
+            Controls.Add(t2);
+            Controls.Add(t3);
+
+            radio[0].Checked = true;
+
+            txbossz.Text = jatekosok[check].össz.ToString();
+            tetek();
+
+
+        }
+        public void tetek()
+        {
+            t2.Text = $" Kérem adjon meg egy tétet! (max {jatekosok[check].össz})";
+
+            t.Text = "0";
+            t.Visible = true;
+            t2.Visible = true;
+            t3.Visible = true;
+        }
+
         public List<Kartya> Pakli()
         {
             Random rand = new Random();
             List<Kartya> kartyak = new List<Kartya>();
-            
+
             string[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
             int[] values = { 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11 };
-            
+
             for (int a = 0; a < 2; a++)
             {
                 int szam = 1;
@@ -53,7 +127,7 @@ namespace BlackJack
                     for (int j = 0; j < ranks.Length; j++)
                     {
                         szam++;
-                        kartyak.Add(new Kartya {  Rang = ranks[j], Ert = values[j],id=szam,  lat = false });
+                        kartyak.Add(new Kartya { Rang = ranks[j], Ert = values[j], id = szam, lat = false });
                     }
                 }
             }
@@ -69,7 +143,10 @@ namespace BlackJack
             }
             return kartyak;
         }
-        public int megszam(List<Kartya>a)
+
+
+
+        public int megszam(List<Kartya> a)
         {
             int valasz = 0;
             foreach(Kartya k in a)
@@ -95,109 +172,52 @@ namespace BlackJack
         }
         private void oszt()
         {
-            if (true)
+
+            oszto.Add(pluszK());
+            picture.Clear();
+            for (int i = 0; i < oszto.Count; i++)
             {
-                oszto.Add(pluszK());
-                oszto.Add(pluszK());
                 picture.Add(new PictureBox());
-                picture.Add(new PictureBox());
-                picture2.Add(new PictureBox());
-                picture2.Add(new PictureBox());
-                picture[0].Size = new Size(140, 220);
-                picture[0].SizeMode = PictureBoxSizeMode.StretchImage;
-                picture[0].Image = Image.FromFile("1.png");
-                picture[0].Location = new Point(310, 35);
-
-                Controls.Add(picture[0]);
-                picture[1].Size = new Size(140, 220);
-                picture[1].SizeMode = PictureBoxSizeMode.StretchImage;
-                picture[1].Image = Image.FromFile($"{oszto[1].id}.png");
-                picture[1].Location = new Point(380, 35);
-                Controls.Add(picture[1]);
+                picture[i].Size = new Size(140, 220);
+                picture[i].SizeMode = PictureBoxSizeMode.StretchImage;
+                if (i == 0)
+                {
+                    picture[i].Image = Image.FromFile(@"..\..\kartya\1.png");
+                }
+                else
+                {
+                    picture[i].Image = Image.FromFile($"..\\..\\kartya\\{oszto[i].id}.png");
+                }
+                picture[i].Location = new Point(310+i*50, 35);
+                Controls.Add(picture[i]);
+                picture[i].BringToFront();
             }
-            
-
-
-            picture[1].BringToFront();
             for (int i = 0; i < jatekosszam; i++)
             {
-                jatekosok[i].lap.Add(pluszK());
-                jatekosok[i].lap.Add(pluszK());
+                if (radio[i].Enabled)
+                {
+                    jatekosok[i].lap.Add(pluszK());
+                    jatekosok[i].lap.Add(pluszK());
+                }  
             }
-            if (true)
-            {
-                picture2[0].Size = new Size(140, 220);
-                picture2[0].SizeMode = PictureBoxSizeMode.StretchImage;
-                picture2[0].Image = Image.FromFile($"{jatekosok[check].lap[0].id}.png");
-                picture2[0].Location = new Point(310, 310);
-                Controls.Add(picture2[0]);
-                picture2[1].Size = new Size(140, 220);
-                picture2[1].SizeMode = PictureBoxSizeMode.StretchImage;
-                picture2[1].Image = Image.FromFile($"{jatekosok[check].lap[0].id}.png");
-                picture2[1].Location = new Point(380, 310);
-                Controls.Add(picture2[1]);
-            }
-            
-            
-            picture2[1].BringToFront();
+            mutat();
         }
-        public List<Kartya> oszto = new List<Kartya>();
-        public List<Kartya> pakk= new List<Kartya>();
-        public List<jatekos> jatekosok = new List<jatekos>();
-        public int jatekosszam = 0;
-        public int alap = 0;
-        public int check = 0;
-        public List<PictureBox> picture = new List<PictureBox>();
-        public List<PictureBox> picture2 = new List<PictureBox>();
-        RadioButton[] radio = new RadioButton[5];
-        TextBox[] txbp = new TextBox[5];
-        TextBox t = new TextBox();
-        Label t2 = new Label();
-        Button t3 = new Button();
-        public Game(int a,int b )
+
+        private void mutat()
         {
-            InitializeComponent();
-            alap = a;
-            jatekosszam = b;
-        }
-
-        private void Game_Load(object sender, EventArgs e)
-        {
-           
-            txbpp.Text = "0";
-            txbop.Text = "0";
-            txbtet.Text = "0";
-            pakk = Pakli();
-            for (int i = 0; i < jatekosszam; i++)
+            picture2.Clear();
+            for (int i = 0; i < jatekosok[check].lap.Count; i++)
             {
-                jatekosok.Add(new jatekos { szam = i.ToString(), tet = 0, lap = new List<Kartya>(), flag = false, össz = alap });
-                radio[i] = new RadioButton();
-                radio[i].Name = i.ToString();
-                radio[i].Location = new Point(920, 30 + i * 40);
-                radio[i].Text = $"{(i+1).ToString()}.játékos";
-                radio[i].CheckedChanged += r_Checked;
-                Controls.Add(radio[i]);
+                picture2.Add(new PictureBox());
+                picture2[i].Size = new Size(140, 220);
+                picture2[i].SizeMode = PictureBoxSizeMode.StretchImage;
+                picture2[i].Image = Image.FromFile($"..\\..\\kartya\\{jatekosok[check].lap[i].id}.png");
+                picture2[i].Location = new Point(310 + i * 50, 310);
+                Controls.Add(picture2[i]);
+                picture2[i].BringToFront();
             }
-            txbossz.Text = jatekosok[0].össz.ToString();
-            radio[0].Checked = true;
-            t = new TextBox();
-            t.Location = new Point(400, 300);
-            t.Size = new Size(200, 40);
-            t2 = new Label();
-            t2.Size = new Size(200, 30);
-            t2.Text = $" Kérem adjon meg egy tétet! (max {jatekosok[check].össz})";
-            t2.Location = new Point(400, 260);
-            t3 = new Button();
-            t3.Location = new Point(400, 340);
-            t3.Size = new Size(200, 40);
-            t3.Text = "tét megadása";
-            t3.Click += t_Click;
-            Controls.Add(t);
-            Controls.Add(t2);
-            Controls.Add(t3);
-
-
         }
+
         private void r_Checked(object sender, EventArgs e)
         {
             for (int i = 0; i < jatekosszam; i++ )
@@ -205,16 +225,14 @@ namespace BlackJack
                 if (radio[i].Checked)
                 {
                     check = i; break;
+                    
                 }
             }
             txbtet.Text = jatekosok[check].tet.ToString();
             txbossz.Text = jatekosok[check].össz.ToString();
             try
             {
-                for (int i = 0; i < picture2.Count; i++) 
-                {
-                    picture2[i].Image = Image.FromFile($"{jatekosok[check].lap[i].id}.png");
-                }
+                mutat();
             }
             catch (Exception ex) { }
         }
@@ -224,6 +242,8 @@ namespace BlackJack
             {
                 if (int.Parse(t.Text) <= jatekosok[check].össz && int.Parse(t.Text) > 0)
                 {
+                   
+                   
                     jatekosok[check].össz -= int.Parse(t.Text);
                     jatekosok[check].tet = int.Parse(t.Text);
                     if (jatekosszam != 1)
@@ -232,13 +252,17 @@ namespace BlackJack
                         {
                             txbtet.Text = jatekosok[check].tet.ToString();
                             txbossz.Text = jatekosok[check].össz.ToString();
+                        
                             radio[check].Checked = false;
-                            radio[0].Checked = true;
+                            radio[0].Checked = true;        
+                            
                             t.Text = "0";
+                            t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
                             t.Visible = false;
-                            t2.Text = $" Kérem adjon meg egy tétet! (max {jatekosok[check].össz})";
                             t2.Visible = false;
                             t3.Visible = false;
+                            pakk = Pakli();
+                            oszto.Add(pluszK());
                             oszt();
                         }
                         else
@@ -256,14 +280,16 @@ namespace BlackJack
                         txbossz.Text = jatekosok[check].össz.ToString();
                         t.Text = "0";
                         t.Visible = false;
-                        t2.Text = $" Kérem adjon meg egy tétet! (max {jatekosok[check].össz})";
+                        t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
                         t2.Visible = false;
                         t3.Visible = false;
+                        pakk = Pakli();
+                        oszto.Add(pluszK());
                         oszt() ;
                     }
                 }else MessageBox.Show("nem megfelelő tét");
             }
-            catch (Exception ex) { MessageBox.Show("nem megfelelő tét"); }  
+            catch (Exception ex) { MessageBox.Show("nem megfelelő "); }  
         }
         private void Game_FormClosed(object sender, FormClosedEventArgs e)
         {

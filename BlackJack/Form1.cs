@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace BlackJack
 {
+   
     public partial class blackjack : Form
     {
 
@@ -30,22 +31,24 @@ namespace BlackJack
         {
             Application.Exit();
         }
-        public int jatekos= 0;
+        public int jatekossz= 0;
         public int alap= 0;
         private void Playbtn_Click(object sender, EventArgs e)
         {
             try
             {
-                jatekos = int.Parse(txb_playercount.Text);
+                jatekossz = int.Parse(txb_playercount.Text);
                 alap = int.Parse(txb_alap.Text);
             }
             catch { }
-            if (alap <= 30000 && alap >= 1000 && jatekos > 0 && jatekos < 6)
+            if (alap <= 30000 && alap >= 1000 && jatekossz > 0 && jatekossz < 6)
             {
-                Form form2 = new Game(alap,jatekos);
+                System.Drawing.Point Loc = this.Location;
+                Form form2 = new Game(alap, jatekossz,Loc );
                 form2.Show();
-                form2.Location = this.Location;
+                
                 Hide();
+
             }
             else MessageBox.Show("nem megfelelő adatok");
             
