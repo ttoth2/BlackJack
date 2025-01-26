@@ -21,11 +21,8 @@ namespace BlackJack
         public class Kartya
         {
             public string Rang { get; set; }
-
             public int Ert { get; set; }
             public int id { get; set; }
-            public bool lat { get; set; }
-
         }
         public class jatekos
         {
@@ -62,7 +59,15 @@ namespace BlackJack
         private void Game_Load(object sender, EventArgs e)
         {
             this.Location = loc;
-            var bj = new blackjack();
+            txbpp.Enabled = false;
+            txbop.Enabled = false;
+            txbtet.Enabled = false;
+            txbossz.Enabled = false;
+
+            btndouble.Enabled = false;
+            btnhit.Enabled = false;
+            btnstand.Enabled = false;
+
             txbpp.Text = "0";
             txbop.Text = "0";
             txbtet.Text = "0";
@@ -127,7 +132,7 @@ namespace BlackJack
                     for (int j = 0; j < ranks.Length; j++)
                     {
                         szam++;
-                        kartyak.Add(new Kartya { Rang = ranks[j], Ert = values[j], id = szam, lat = false });
+                        kartyak.Add(new Kartya { Rang = ranks[j], Ert = values[j], id = szam });
                     }
                 }
             }
@@ -216,20 +221,27 @@ namespace BlackJack
                 Controls.Add(picture2[i]);
                 picture2[i].BringToFront();
             }
+            txbpp.Text = megszam(jatekosok[check].lap).ToString();
         }
 
         private void r_Checked(object sender, EventArgs e)
         {
-            for (int i = 0; i < jatekosszam; i++ )
+            for (int i = 0; i < jatekosszam; i++)
             {
                 if (radio[i].Checked)
                 {
                     check = i; break;
-                    
+
                 }
             }
             txbtet.Text = jatekosok[check].tet.ToString();
             txbossz.Text = jatekosok[check].össz.ToString();
+            if (jatekosok[check].flag)
+            {
+                btndouble.Enabled = true;
+                btnhit.Enabled = true;
+                btnstand.Enabled = true;
+            }
             try
             {
                 mutat();
@@ -325,20 +337,19 @@ namespace BlackJack
             if (megszam(jatekosok[check].lap) > 21)
             {
                 veszt();
-            } 
-            
-            picture2.Add(new PictureBox());
-            picture2[picture2.Count-1].Size = new Size(140, 220);
-            picture2[picture2.Count - 1].SizeMode = PictureBoxSizeMode.StretchImage;
-            picture2[picture2.Count - 1].Image = Image.FromFile($"{jatekosok[check].lap[picture2.Count - 1].id}.png");
-            picture2[picture2.Count - 1].Location = new Point(430+ (picture2.Count - 3)* 20, 340);
-            Controls.Add(picture2[picture2.Count - 1]);
+                
+            }
+            mutat();
+          
         }
 
         public void veszt()
         {
             jatekosok[check].flag = true;
             jatekosok[check].tet = 0;
+            btndouble.Enabled = false;
+            btnhit.Enabled = false;
+            btnstand.Enabled = false;
         }
         public void dönt()
         {
