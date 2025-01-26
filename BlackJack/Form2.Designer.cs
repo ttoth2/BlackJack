@@ -52,7 +52,7 @@
             // 
             // btnstand
             // 
-            this.btnstand.Location = new System.Drawing.Point(135, 324);
+            this.btnstand.Location = new System.Drawing.Point(12, 402);
             this.btnstand.Name = "btnstand";
             this.btnstand.Size = new System.Drawing.Size(100, 50);
             this.btnstand.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             // btnhit
             // 
-            this.btnhit.Location = new System.Drawing.Point(12, 324);
+            this.btnhit.Location = new System.Drawing.Point(12, 309);
             this.btnhit.Name = "btnhit";
             this.btnhit.Size = new System.Drawing.Size(100, 50);
             this.btnhit.TabIndex = 2;
@@ -72,9 +72,9 @@
             // 
             // btndouble
             // 
-            this.btndouble.Location = new System.Drawing.Point(68, 220);
+            this.btndouble.Location = new System.Drawing.Point(12, 210);
             this.btndouble.Name = "btndouble";
-            this.btndouble.Size = new System.Drawing.Size(110, 55);
+            this.btndouble.Size = new System.Drawing.Size(100, 55);
             this.btndouble.TabIndex = 3;
             this.btndouble.Text = "DOUBLE";
             this.btndouble.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
             // 
             // txbpp
             // 
-            this.txbpp.Location = new System.Drawing.Point(743, 485);
+            this.txbpp.Location = new System.Drawing.Point(681, 391);
             this.txbpp.Name = "txbpp";
             this.txbpp.ReadOnly = true;
             this.txbpp.Size = new System.Drawing.Size(100, 20);
@@ -90,7 +90,7 @@
             // 
             // txbop
             // 
-            this.txbop.Location = new System.Drawing.Point(743, 94);
+            this.txbop.Location = new System.Drawing.Point(681, 96);
             this.txbop.Name = "txbop";
             this.txbop.ReadOnly = true;
             this.txbop.Size = new System.Drawing.Size(97, 20);

@@ -79,6 +79,7 @@ namespace BlackJack
                 radio[i].CheckedChanged += r_Checked;
                 Controls.Add(radio[i]);
             }
+            
             t2 = new Label();
             t3 = new Button();
             t = new TextBox();
@@ -110,6 +111,10 @@ namespace BlackJack
         }
         public void tetek()
         {
+            for (int i = 0; i < jatekosszam; i++)
+            {
+                radio[i].Enabled = true;
+            }
             igaze = 0;
             for (int i = 0; i < picture.Count; i++)
             {
@@ -138,6 +143,7 @@ namespace BlackJack
             t2.Visible = true;
             t3.Visible = true;
             btnnext.Enabled = false;
+            
         }
 
         public List<Kartya> Pakli()
@@ -304,7 +310,10 @@ namespace BlackJack
 
                         radio[check].Checked = false;
                         radio[0].Checked = true;
-
+                        for (int i = 0; i < jatekosszam; i++)
+                        {
+                            radio[i].Enabled = true;
+                        }
                         t.Text = "0";
                         t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
                         t.Visible = false;
@@ -341,7 +350,10 @@ namespace BlackJack
                             btnstand.Enabled = true;
                             radio[check].Checked = false;
                             radio[0].Checked = true;
-
+                            foreach (RadioButton r in radio)
+                            {
+                                r.Enabled = true;
+                            }
                             t.Text = "0";
                             t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
                             t.Visible = false;
@@ -365,6 +377,14 @@ namespace BlackJack
                         btnstand.Enabled = true;
                         txbtet.Text = jatekosok[check].tet.ToString();
                         txbossz.Text = jatekosok[check].össz.ToString();
+                       
+                        for (int i = 0; i < jatekosszam; i++)
+                        {
+                            radio[i].Enabled = true;
+                        }
+                             
+                         
+                        
                         t.Text = "0";
                         t.Visible = false;
                         t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
@@ -458,6 +478,10 @@ namespace BlackJack
 
         private void btnnext_Click(object sender, EventArgs e)
         {
+            if (!jatekosok[check].flag)
+            {
+
+            }
             tetek();
         }
         public void összevet()
@@ -468,16 +492,31 @@ namespace BlackJack
                 mutat();
                 txbop.Text = megszam(oszto).ToString();
             }
-           
-            foreach (jatekos item in jatekosok) 
+
+            foreach (jatekos item in jatekosok)
             {
-                if (megszam(oszto) > megszam(item.lap))
+                if (megszam(oszto) > 21)
+                {
+                    item.össz += (item.tet * 2);
+                    item.tet = 0;
+                  
+                }
+                else if (megszam(oszto)== megszam(item.lap))
+                {
+                    item.össz += item.tet;
+                    item.tet = 0;
+                }
+                else if (megszam(oszto) > megszam(item.lap))
                 {
                     item.tet = 0;
                 }
                 else { item.össz += (item.tet * 2); item.tet = 0; }
+
             }
-            
+            txbossz.Text = jatekosok[check].össz.ToString();
+            txbtet.Text = jatekosok[check].tet.ToString();
+
+
         }
         public void veszt()
         {
@@ -487,13 +526,14 @@ namespace BlackJack
             btnhit.Enabled = false;
             btnstand.Enabled = false;
         }
-        public void dönt()
+        
+        public void vege()
         {
 
-        }
-        public void nyer()
-        {
-
+            Form form2 = new blackjack();
+            form2.Show();
+            form2.Location = this.Location;
+            Hide();
         }
 
 
