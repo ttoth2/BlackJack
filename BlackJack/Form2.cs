@@ -29,6 +29,7 @@ namespace BlackJack
             public string szam { get; set; }
             public int össz { get; set; }
             public int tet { get; set; }
+            public bool doubleflag { get; set; }
             public bool flag { get; set; }
             public List<Kartya> lap { get; set; }
         }
@@ -42,7 +43,7 @@ namespace BlackJack
         public int check = 0;
         public List<PictureBox> picture = new List<PictureBox>();
         public List<PictureBox> picture2 = new List<PictureBox>();
-        RadioButton[] radio = new RadioButton[5];
+        public List<RadioButton>radio = new List<RadioButton>();
         TextBox[] txbp = new TextBox[5];
         TextBox t = new TextBox();
         Label t2 = new Label();
@@ -71,8 +72,8 @@ namespace BlackJack
             txbtet.Text = "0";
             for (int i = 0; i < jatekosszam; i++)
             {
-                jatekosok.Add(new jatekos { szam = i.ToString(), tet = 0, lap = new List<Kartya>(), flag = false, össz = alap });
-                radio[i] = new RadioButton();
+                jatekosok.Add(new jatekos { szam = i.ToString(), tet = 0, lap = new List<Kartya>(), doubleflag = false , flag = false, össz = alap });
+                radio.Add(new RadioButton());
                 radio[i].Name = i.ToString();
                 radio[i].Location = new Point(920, 30 + i * 40);
                 radio[i].Text = $"{(i + 1).ToString()}.játékos";
@@ -111,9 +112,9 @@ namespace BlackJack
         }
         public void tetek()
         {
-            for (int i = 0; i < jatekosszam; i++)
+            for (int i = 0; i < radio.Count; i++)
             {
-                radio[i].Enabled = true;
+                radio[i].Enabled = false;
             }
             igaze = 0;
             for (int i = 0; i < picture.Count; i++)
@@ -124,18 +125,26 @@ namespace BlackJack
             {
                 Controls.Remove(picture2[i]);
             }
+            oszto.Clear();
             picture2.Clear();
             picture.Clear();
-            foreach (jatekos item in jatekosok) 
+            int min = 1000;
+            foreach (jatekos item in jatekosok)
             {
-                if (item.össz >0)
+                if (item.össz > 0)
                 {
                     item.flag = false;
+                    if (int.Parse(item.szam )< min)
+                    {
+                        min = int.Parse(item.szam) ;
+                    }
                 }
+               
                 item.tet = 0;
                 item.lap.Clear();
             }
-
+            radio[check].Checked = false;
+            radio[min].Checked = true;
             t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
             t.Text = "0";
 
@@ -278,7 +287,7 @@ namespace BlackJack
             }
             txbtet.Text = jatekosok[check].tet.ToString();
             txbossz.Text = jatekosok[check].össz.ToString();
-            if (!jatekosok[check].flag && jatekosok[check].tet !=0 && jatekosok[check].össz != 0)
+            if (!jatekosok[check].flag && jatekosok[check].tet !=0 )
             {
                 btndouble.Enabled = true;
                 btnhit.Enabled = true;
@@ -350,9 +359,9 @@ namespace BlackJack
                             btnstand.Enabled = true;
                             radio[check].Checked = false;
                             radio[0].Checked = true;
-                            foreach (RadioButton r in radio)
+                            for (int i = 0; i < jatekosszam; i++)
                             {
-                                r.Enabled = true;
+                                radio[i].Enabled = true;
                             }
                             t.Text = "0";
                             t2.Text = $" Kérem adjon meg egy tétet! ({jatekosok[check].össz} - 0)";
@@ -413,12 +422,29 @@ namespace BlackJack
 
         private void btndouble_Click(object sender, EventArgs e)
         {
+            jatekosok[check].doubleflag= true;
             jatekosok[check].lap.Add(pluszK());
             jatekosok[check].össz -= jatekosok[check].tet;
             jatekosok[check].tet = jatekosok[check].tet * 2;
             if (megszam(jatekosok[check].lap) > 21)
             {
+                btndouble.Enabled = false;
+                btnhit.Enabled = false;
+                btnstand.Enabled = false;
                 veszt();
+                foreach (var item in jatekosok)
+                {
+                    if (item.flag)
+                    {
+                        igaze++;
+                    }
+                }
+                if (igaze == jatekosszam)
+                {
+                    összevet();
+                    btnnext.Enabled = true;
+                    return;
+                }
             }
             mutat();
         }
@@ -478,11 +504,24 @@ namespace BlackJack
 
         private void btnnext_Click(object sender, EventArgs e)
         {
-            if (!jatekosok[check].flag)
+            int nulla = 0;
+            for (int i = 0; i < jatekosok.Count; i++) 
             {
-
+                if (jatekosok[i].össz == 0)
+                {
+                    radio[i].Enabled = false;
+                    radio.RemoveAt(i);
+                    jatekosok.RemoveAt(i);
+                    nulla ++;
+                }
             }
-            tetek();
+            if(nulla == jatekosszam)
+            {
+                nulla = 0;
+                vege();
+            }
+            else tetek();
+
         }
         public void összevet()
         {
