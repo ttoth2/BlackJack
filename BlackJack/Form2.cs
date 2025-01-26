@@ -19,6 +19,7 @@ namespace BlackJack
 
     public partial class Game : Form
     {
+        //Tóth Tamás- CSenki Gergely
         public class Kartya
         {
             public string Rang { get; set; }
@@ -310,13 +311,14 @@ namespace BlackJack
         {
             try
             {
+
                 if (jatekosok[check].össz == 0)
                 {
                     if (check == jatekosszam - 1)
                     {
                         txbtet.Text = jatekosok[check].tet.ToString();
                         txbossz.Text = jatekosok[check].össz.ToString();
-
+                        
                         radio[check].Checked = false;
                         radio[0].Checked = true;
                         for (int i = 0; i < jatekosszam; i++)
@@ -345,8 +347,7 @@ namespace BlackJack
                         }
                        
                     }
-                }
-                if (int.Parse(t.Text) <= jatekosok[check].össz && int.Parse(t.Text) > 0)
+                }else if (int.Parse(t.Text) <= jatekosok[check].össz && int.Parse(t.Text) > 0)
                 {
 
                     
@@ -540,7 +541,7 @@ namespace BlackJack
         }
         public void log(string msg)
         {
-            System.IO.StreamWriter sw = new System.IO.StreamWriter("log.txt", true, Encoding.UTF32);
+            System.IO.StreamWriter sw = new System.IO.StreamWriter("log.txt", true, Encoding.UTF8);
             sw.WriteLine(msg);
             sw.Close();
         }
@@ -552,7 +553,7 @@ namespace BlackJack
                 mutat();
                 txbop.Text = megszam(oszto).ToString();
             }
-
+            mutat();
             foreach (jatekos item in jatekosok)
             {
                 if (megszam(oszto) > 21)
