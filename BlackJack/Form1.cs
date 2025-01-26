@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BlackJack
 {
@@ -23,8 +24,48 @@ namespace BlackJack
 
         private void blackjack_Load(object sender, EventArgs e)
         {
-            txb_alap.Text = "1000";
-            txb_playercount.Text = "1";
+            txb_alap.Text = "Max 30 000 lehet az alap tét";
+            txb_playercount.Text = "Max 5 játékos lehet";
+            txb_alap.ForeColor = System.Drawing.Color.Gray; 
+            txb_alap.Enter += TextBox_Enter; 
+            txb_alap.Leave += TextBox_Leave;  
+            Controls.Add(txb_alap);
+            txb_playercount.ForeColor = System.Drawing.Color.Gray;
+            txb_playercount.Enter += TextBox_Entere;
+            txb_playercount.Leave += TextBox_Leavee;
+            Controls.Add(txb_playercount);
+        }
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            if (txb_alap.Text == "Max 30 000 lehet az alap tét" && txb_alap.ForeColor == System.Drawing.Color.Gray)
+            {
+                txb_alap.Text = ""; 
+                txb_alap.ForeColor = System.Drawing.Color.Black;  
+            }
+        }
+        private void TextBox_Entere(object sender, EventArgs e)
+        {
+            if (txb_playercount.Text == "Max 5 játékos lehet" && txb_playercount.ForeColor == System.Drawing.Color.Gray)
+            {
+                txb_playercount.Text = "";
+                txb_playercount.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+        private void TextBox_Leavee(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txb_playercount.Text))
+            {
+                txb_playercount.Text = "Max 5 játékos lehet";
+                txb_playercount.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txb_alap.Text))
+            {
+                txb_alap.Text = "Max 30 000 lehet az alap tét";  
+                txb_alap.ForeColor = System.Drawing.Color.Gray;  
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
