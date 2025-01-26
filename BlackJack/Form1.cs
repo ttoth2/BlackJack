@@ -19,13 +19,14 @@ namespace BlackJack
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-      
         }
+
+        
 
         private void blackjack_Load(object sender, EventArgs e)
         {
-            txb_alap.Text = "Max 30 000 lehet az alap tét";
-            txb_playercount.Text = "Max 5 játékos lehet";
+            txb_alap.Text = "Max:30 000 | Min:1000";
+            txb_playercount.Text = "Max: 5 | Min: 1";
             txb_alap.ForeColor = System.Drawing.Color.Gray; 
             txb_alap.Enter += TextBox_Enter; 
             txb_alap.Leave += TextBox_Leave;  
@@ -37,7 +38,7 @@ namespace BlackJack
         }
         private void TextBox_Enter(object sender, EventArgs e)
         {
-            if (txb_alap.Text == "Max 30 000 lehet az alap tét" && txb_alap.ForeColor == System.Drawing.Color.Gray)
+            if (txb_alap.Text == "Max:30 000 | Min:1000" && txb_alap.ForeColor == System.Drawing.Color.Gray)
             {
                 txb_alap.Text = ""; 
                 txb_alap.ForeColor = System.Drawing.Color.Black;  
@@ -45,7 +46,7 @@ namespace BlackJack
         }
         private void TextBox_Entere(object sender, EventArgs e)
         {
-            if (txb_playercount.Text == "Max 5 játékos lehet" && txb_playercount.ForeColor == System.Drawing.Color.Gray)
+            if (txb_playercount.Text == "Max: 5 | Min: 1" && txb_playercount.ForeColor == System.Drawing.Color.Gray)
             {
                 txb_playercount.Text = "";
                 txb_playercount.ForeColor = System.Drawing.Color.Black;
@@ -55,7 +56,7 @@ namespace BlackJack
         {
             if (string.IsNullOrEmpty(txb_playercount.Text))
             {
-                txb_playercount.Text = "Max 5 játékos lehet";
+                txb_playercount.Text = "Max: 5 | Min: 1";
                 txb_playercount.ForeColor = System.Drawing.Color.Gray;
             }
         }
@@ -63,7 +64,7 @@ namespace BlackJack
         {
             if (string.IsNullOrEmpty(txb_alap.Text))
             {
-                txb_alap.Text = "Max 30 000 lehet az alap tét";  
+                txb_alap.Text = "Max:30 000 | Min:1000";  
                 txb_alap.ForeColor = System.Drawing.Color.Gray;  
             }
         }

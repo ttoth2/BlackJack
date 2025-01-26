@@ -42,46 +42,64 @@
             // 
             // quitbtn
             // 
-            this.quitbtn.Location = new System.Drawing.Point(908, 562);
+            this.quitbtn.BackColor = System.Drawing.Color.Transparent;
+            this.quitbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.quitbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quitbtn.Font = new System.Drawing.Font("NSimSun", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quitbtn.Location = new System.Drawing.Point(849, 562);
             this.quitbtn.Name = "quitbtn";
-            this.quitbtn.Size = new System.Drawing.Size(75, 47);
+            this.quitbtn.Size = new System.Drawing.Size(134, 47);
             this.quitbtn.TabIndex = 0;
             this.quitbtn.Text = "Quit";
-            this.quitbtn.UseVisualStyleBackColor = true;
+            this.quitbtn.UseVisualStyleBackColor = false;
             this.quitbtn.Click += new System.EventHandler(this.quitbtn_Click);
             // 
             // btnstand
             // 
+            this.btnstand.BackColor = System.Drawing.Color.Transparent;
+            this.btnstand.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnstand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnstand.Font = new System.Drawing.Font("NSimSun", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnstand.Location = new System.Drawing.Point(135, 324);
             this.btnstand.Name = "btnstand";
             this.btnstand.Size = new System.Drawing.Size(100, 50);
             this.btnstand.TabIndex = 1;
             this.btnstand.Text = "STAND";
-            this.btnstand.UseVisualStyleBackColor = true;
+            this.btnstand.UseVisualStyleBackColor = false;
             this.btnstand.Click += new System.EventHandler(this.btnstand_Click);
             // 
             // btnhit
             // 
+            this.btnhit.BackColor = System.Drawing.Color.Transparent;
+            this.btnhit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnhit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnhit.Font = new System.Drawing.Font("NSimSun", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnhit.Location = new System.Drawing.Point(12, 324);
             this.btnhit.Name = "btnhit";
             this.btnhit.Size = new System.Drawing.Size(100, 50);
             this.btnhit.TabIndex = 2;
             this.btnhit.Text = "HIT";
-            this.btnhit.UseVisualStyleBackColor = true;
+            this.btnhit.UseVisualStyleBackColor = false;
             this.btnhit.Click += new System.EventHandler(this.btnhit_Click);
             // 
             // btndouble
             // 
+            this.btndouble.BackColor = System.Drawing.Color.Transparent;
+            this.btndouble.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btndouble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btndouble.Font = new System.Drawing.Font("NSimSun", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btndouble.Location = new System.Drawing.Point(68, 220);
             this.btndouble.Name = "btndouble";
             this.btndouble.Size = new System.Drawing.Size(110, 55);
             this.btndouble.TabIndex = 3;
             this.btndouble.Text = "DOUBLE";
-            this.btndouble.UseVisualStyleBackColor = true;
+            this.btndouble.UseVisualStyleBackColor = false;
             this.btndouble.Click += new System.EventHandler(this.btndouble_Click);
             // 
             // txbpp
             // 
+            this.txbpp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txbpp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbpp.Location = new System.Drawing.Point(743, 485);
             this.txbpp.Name = "txbpp";
             this.txbpp.ReadOnly = true;
@@ -90,6 +108,8 @@
             // 
             // txbop
             // 
+            this.txbop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txbop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbop.Location = new System.Drawing.Point(743, 94);
             this.txbop.Name = "txbop";
             this.txbop.ReadOnly = true;
@@ -98,6 +118,8 @@
             // 
             // txbtet
             // 
+            this.txbtet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txbtet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbtet.Location = new System.Drawing.Point(68, 12);
             this.txbtet.Name = "txbtet";
             this.txbtet.ReadOnly = true;
@@ -106,6 +128,8 @@
             // 
             // txbossz
             // 
+            this.txbossz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txbossz.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txbossz.Location = new System.Drawing.Point(671, 586);
             this.txbossz.Name = "txbossz";
             this.txbossz.ReadOnly = true;
@@ -114,12 +138,17 @@
             // 
             // btnnext
             // 
-            this.btnnext.Location = new System.Drawing.Point(908, 470);
+            this.btnnext.BackColor = System.Drawing.Color.Transparent;
+            this.btnnext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnnext.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnnext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnext.Font = new System.Drawing.Font("NSimSun", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnext.Location = new System.Drawing.Point(878, 470);
             this.btnnext.Name = "btnnext";
-            this.btnnext.Size = new System.Drawing.Size(75, 48);
+            this.btnnext.Size = new System.Drawing.Size(105, 48);
             this.btnnext.TabIndex = 8;
             this.btnnext.Text = "Next";
-            this.btnnext.UseVisualStyleBackColor = true;
+            this.btnnext.UseVisualStyleBackColor = false;
             this.btnnext.Click += new System.EventHandler(this.btnnext_Click);
             // 
             // Game
@@ -128,6 +157,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.ControlBox = false;
             this.Controls.Add(this.btnnext);
             this.Controls.Add(this.txbossz);
             this.Controls.Add(this.txbtet);

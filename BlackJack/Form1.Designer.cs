@@ -41,9 +41,11 @@
             // Playbtn
             // 
             this.Playbtn.BackColor = System.Drawing.Color.Transparent;
+            this.Playbtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Playbtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Playbtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Playbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Playbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Playbtn.Font = new System.Drawing.Font("NSimSun", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Playbtn.Location = new System.Drawing.Point(336, 464);
             this.Playbtn.Name = "Playbtn";
             this.Playbtn.Size = new System.Drawing.Size(330, 55);
@@ -56,8 +58,9 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Transparent;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Font = new System.Drawing.Font("NSimSun", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(336, 542);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(330, 55);
@@ -81,6 +84,7 @@
             this.txb_playercount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txb_playercount.Location = new System.Drawing.Point(401, 365);
             this.txb_playercount.Name = "txb_playercount";
+            this.txb_playercount.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txb_playercount.Size = new System.Drawing.Size(200, 20);
             this.txb_playercount.TabIndex = 3;
             this.txb_playercount.TextChanged += new System.EventHandler(this.txb_playercount_TextChanged);
@@ -115,13 +119,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(984, 611);
+            this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txb_playercount);
             this.Controls.Add(this.txb_alap);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Playbtn);
+            this.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "blackjack";
             this.Text = "BlackJack";
